@@ -18,4 +18,16 @@ public class HotelOperations implements IHotelOperations {
     public int getNumberOfHotels() {
         return this.hotels.size();
     }
+
+    @Override
+    public <E> Hotels findCheapHotel(E... dates) {
+        Hotels hotel = hotels.get(0);
+
+        for (int i=0; i < hotels.size(); i++){
+            if (hotel.getHotelRate() > hotels.get(i).getHotelRate())
+                hotel = hotels.get(i);
+        }
+
+        return new Hotels(hotel.getHotelName(), dates.length * hotel.getHotelRate());
+    }
 }

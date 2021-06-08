@@ -1,7 +1,10 @@
 package com.hotelreservation.services;
 
+import com.hotelreservation.entity.Hotels;
+
 public interface IHotelOperations {
 
-    public void addHotels(String hotelName, int hotelRate);
-    public int getNumberOfHotels();
+     void addHotels(String hotelName, int hotelRate);
+     int getNumberOfHotels();
+     <E> Hotels findCheapHotel(E... dates);
 }
