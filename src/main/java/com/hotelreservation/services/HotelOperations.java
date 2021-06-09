@@ -3,6 +3,7 @@ package com.hotelreservation.services;
 import com.hotelreservation.entity.Hotels;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class HotelOperations implements IHotelOperations {
@@ -10,8 +11,8 @@ public class HotelOperations implements IHotelOperations {
     List<Hotels> hotels = new ArrayList<>();
 
     @Override
-    public void addHotels(String hotelName, int hotelRate) {
-        hotels.add(new Hotels(hotelName, hotelRate));
+    public void addHotels(String hotelName, int hotelWeekRate, int hotelWeekEndRate) {
+        hotels.add(new Hotels(hotelName, hotelWeekRate, hotelWeekEndRate));
     }
 
     @Override
@@ -19,15 +20,17 @@ public class HotelOperations implements IHotelOperations {
         return this.hotels.size();
     }
 
+    @SafeVarargs
     @Override
-    public <E> Hotels findCheapHotel(E... dates) {
+    public final <E> Hotels findCheapHotel(E... dates) {
+        List<E> datesArray = Arrays.asList(dates);
         Hotels hotel = hotels.get(0);
 
-        for (int i=0; i < hotels.size(); i++){
-            if (hotel.getHotelRate() > hotels.get(i).getHotelRate())
-                hotel = hotels.get(i);
+        for (Hotels value : hotels) {
+            if (hotel.getHotelWeekRate() > value.getHotelWeekRate())
+                hotel = value;
         }
 
-        return new Hotels(hotel.getHotelName(), dates.length * hotel.getHotelRate());
+        return new Hotels(hotel.getHotelName(), datesArray.size() * hotel.getHotelWeekRate(), hotel.getHotelWeekEndRate());
     }
 }

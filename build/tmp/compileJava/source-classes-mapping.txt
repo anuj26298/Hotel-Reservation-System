@@ -1,8 +1,8 @@
 com/hotelreservation/controller/HotelReservation.java
  com.hotelreservation.controller.HotelReservation
-com/hotelreservation/entity/Hotels.java
- com.hotelreservation.entity.Hotels
 com/hotelreservation/services/IHotelOperations.java
  com.hotelreservation.services.IHotelOperations
+com/hotelreservation/entity/Hotels.java
+ com.hotelreservation.entity.Hotels
 com/hotelreservation/services/HotelOperations.java
  com.hotelreservation.services.HotelOperations

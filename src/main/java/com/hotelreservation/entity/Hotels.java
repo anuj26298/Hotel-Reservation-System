@@ -3,26 +3,30 @@ package com.hotelreservation.entity;
 public class Hotels {
 
     private String hotelName;
-    private int hotelRate;
+    private int hotelWeekRate;
+    private int hotelWeekEndRate;
 
-    public Hotels(String hotelName, int hotelRate) {
+    public Hotels(String hotelName, int hotelWeekRate, int hotelWeekEndRate) {
         this.hotelName = hotelName;
-        this.hotelRate = hotelRate;
+        this.hotelWeekRate = hotelWeekRate;
+        this.hotelWeekEndRate = hotelWeekEndRate;
     }
-
     public String getHotelName() {
         return hotelName;
     }
-
     public void setHotelName(String hotelName) {
         this.hotelName = hotelName;
     }
-
-    public int getHotelRate() {
-        return hotelRate;
+    public int getHotelWeekRate() {
+        return hotelWeekRate;
     }
-
-    public void setHotelRate(int hotelRate) {
-        this.hotelRate = hotelRate;
+    public void setHotelWeekRate(int hotelWeekRate) {
+        this.hotelWeekRate = hotelWeekRate;
+    }
+    public int getHotelWeekEndRate() {
+        return hotelWeekEndRate;
+    }
+    public void setHotelWeekEndRate(int hotelWeekEndRate) {
+        this.hotelWeekEndRate = hotelWeekEndRate;
     }
 }
