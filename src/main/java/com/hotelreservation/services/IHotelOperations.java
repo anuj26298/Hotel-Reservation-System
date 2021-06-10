@@ -1,10 +1,14 @@
 package com.hotelreservation.services;
 
+import com.hotelreservation.controller.Output;
+import com.hotelreservation.entity.CustomerType;
 import com.hotelreservation.entity.Hotels;
+
+import java.util.List;
 
 public interface IHotelOperations {
 
-     void addHotels(String hotelName, int hotelWeekRate, int hotelWeekEndRate);
+     boolean addHotels(Hotels hotels);
      int getNumberOfHotels();
-     <E> Hotels findCheapHotel(E... dates);
+     List<Output> findCheapHotel(CustomerType customerType, String date1, String date2);
 }

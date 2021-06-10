@@ -1,18 +1,27 @@
 package com.hotelreservation.services;
 
+import com.hotelreservation.controller.Output;
+import com.hotelreservation.entity.CustomerType;
 import com.hotelreservation.entity.Hotels;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class HotelOperations implements IHotelOperations {
 
-    List<Hotels> hotels = new ArrayList<>();
+    private List<Hotels> hotels;
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("ddMMMyyy");
+
+    public HotelOperations() {
+        this.hotels = new ArrayList<>();
+    }
+
 
     @Override
-    public void addHotels(String hotelName, int hotelWeekRate, int hotelWeekEndRate) {
-        hotels.add(new Hotels(hotelName, hotelWeekRate, hotelWeekEndRate));
+    public boolean addHotels(Hotels hotel) {
+        return this.hotels.add(hotel);
     }
 
     @Override
@@ -20,17 +29,25 @@ public class HotelOperations implements IHotelOperations {
         return this.hotels.size();
     }
 
-    @SafeVarargs
+
     @Override
-    public final <E> Hotels findCheapHotel(E... dates) {
-        List<E> datesArray = Arrays.asList(dates);
-        Hotels hotel = hotels.get(0);
+    public List<Output> findCheapHotel(CustomerType customerType, String date1, String date2) {
+        LocalDate initialDate = LocalDate.parse(date1, DATE_TIME_FORMATTER);
+        LocalDate endDate = LocalDate.parse(date2, DATE_TIME_FORMATTER);
 
-        for (Hotels value : hotels) {
-            if (hotel.getHotelWeekRate() > value.getHotelWeekRate())
-                hotel = value;
-        }
+        List<Output> outputs = this.hotels.stream()
+                .map(hotel -> {
+                    Output output = new Output();
+                    output.setHotelName(hotel.getHotelName());
+                    output.setTotalRate(hotel.getTotalRate(customerType, initialDate, endDate));
+                    return output;
+                })
+                .sorted(Comparator.comparing(Output :: getTotalRate))
+                .collect(Collectors.toList());
 
-        return new Hotels(hotel.getHotelName(), datesArray.size() * hotel.getHotelWeekRate(), hotel.getHotelWeekEndRate());
+        return outputs.stream()
+                .filter(output -> output.getTotalRate() == outputs.get(0).getTotalRate())
+                .collect(Collectors.toList());
+
     }
 }
