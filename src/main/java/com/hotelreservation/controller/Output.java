@@ -3,7 +3,7 @@ package com.hotelreservation.controller;
 public class Output {
     private String hotelName;
     private int totalRate;
-    private int hotelRating;
+    private int rating;
 
     public String getHotelName() {
         return hotelName;
@@ -21,11 +21,11 @@ public class Output {
         this.totalRate = totalRate;
     }
 
-    public int getHotelRating() {
-        return hotelRating;
+    public int getRating() {
+        return rating;
     }
 
-    public void setHotelRating(int hotelRating) {
-        this.hotelRating = hotelRating;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 }

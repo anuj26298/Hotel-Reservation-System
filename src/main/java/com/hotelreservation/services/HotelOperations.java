@@ -59,16 +59,18 @@ public class HotelOperations implements IHotelOperations {
                 .map(hotel -> {
                     Output output = new Output();
                     output.setHotelName(hotel.getHotelName());
-                    output.setHotelRating(hotel.getRating());
+                    output.setTotalRate(hotel.getTotalRate(customerType, initialDate, endDate));
+                    output.setRating(hotel.getRating());
                     return output;
                 })
-                .sorted(Comparator.comparing(Output :: getTotalRate).thenComparing(Output :: getHotelRating))
+                .sorted(Comparator.comparing(Output :: getTotalRate).thenComparing(Output :: getRating,
+                        Comparator.reverseOrder()))
                 .collect(Collectors.toList());
 
         return outputs.stream()
                 .filter(output ->
                         output.getTotalRate() == outputs.get(0).getTotalRate()
-                && output.getHotelRating() == outputs.get(0).getHotelRating())
+                && output.getRating() == outputs.get(0).getRating())
                 .collect(Collectors.toList());
     }
 }

@@ -65,4 +65,16 @@ public class HotelReservationTest {
     public void givenHotelRating_WhenAddHotelRating_ReturnTrue() {
         Assert.assertTrue(hotelOperations.addHotels(lakewood));
     }
+
+    @Test
+    public void givenHotelsAndDates_WhenFindBestRatedHotel_ReturnBestRatedHotel() {
+        List<Output> bestRatedHotel = hotelOperations.findCheapBestRatedHotel(CustomerType.REGULAR,
+                "11Sep2020", "12Sep2020");
+        Assert.assertEquals(1,bestRatedHotel.size());
+        Assert.assertEquals("Bridgewood", bestRatedHotel.get(0).getHotelName());
+        Assert.assertEquals(200, bestRatedHotel.get(0).getTotalRate());
+        Assert.assertEquals(4, bestRatedHotel.get(0).getRating());
+    }
+
+
 }

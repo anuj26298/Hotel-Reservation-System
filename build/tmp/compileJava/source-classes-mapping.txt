@@ -1,7 +1,7 @@
 com/hotelreservation/controller/HotelReservation.java
  com.hotelreservation.controller.HotelReservation
-com/hotelreservation/controller/Output.java
- com.hotelreservation.controller.Output
+com/hotelreservation/services/IHotelOperations.java
+ com.hotelreservation.services.IHotelOperations
 com/hotelreservation/entity/CustomerType.java
  com.hotelreservation.entity.CustomerType
 com/hotelreservation/exceptions/HotelExceptions.java
@@ -11,7 +11,7 @@ com/hotelreservation/services/Rate.java
  com.hotelreservation.services.Rate
 com/hotelreservation/entity/Hotels.java
  com.hotelreservation.entity.Hotels
-com/hotelreservation/services/IHotelOperations.java
- com.hotelreservation.services.IHotelOperations
+com/hotelreservation/controller/Output.java
+ com.hotelreservation.controller.Output
 com/hotelreservation/services/HotelOperations.java
  com.hotelreservation.services.HotelOperations
