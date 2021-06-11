@@ -3,7 +3,9 @@ package com.hotelreservation.services;
 import com.hotelreservation.controller.Output;
 import com.hotelreservation.entity.CustomerType;
 import com.hotelreservation.entity.Hotels;
+import com.hotelreservation.exceptions.HotelExceptions;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -92,5 +94,13 @@ public class HotelOperations implements IHotelOperations {
         return outputs.stream()
                 .filter(output -> output.getRating() == outputs.get(0).getRating())
                 .collect(Collectors.toList());
+    }
+
+    private LocalDate getParseDate(String date){
+        try {
+            return LocalDate.parse(date, DATE_TIME_FORMATTER);
+        }catch (DateTimeException e){
+            throw new HotelExceptions(HotelExceptions.ExceptionType.INVALID_DATE_FORMAT);
+        }
     }
 }

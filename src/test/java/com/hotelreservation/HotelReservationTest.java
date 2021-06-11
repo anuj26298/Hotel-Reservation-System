@@ -3,6 +3,7 @@ package com.hotelreservation;
 import com.hotelreservation.controller.Output;
 import com.hotelreservation.entity.CustomerType;
 import com.hotelreservation.entity.Hotels;
+import com.hotelreservation.exceptions.HotelExceptions;
 import com.hotelreservation.services.HotelOperations;
 import com.hotelreservation.services.IHotelOperations;
 import com.hotelreservation.services.Rate;
@@ -84,4 +85,5 @@ public class HotelReservationTest {
         Assert.assertEquals(370, bestRatedHotel.get(0).getTotalRate());
         Assert.assertEquals(5, bestRatedHotel.get(0).getRating());
     }
+
 }
