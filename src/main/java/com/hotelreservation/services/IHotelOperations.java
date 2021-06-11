@@ -11,4 +11,5 @@ public interface IHotelOperations {
      boolean addHotels(Hotels hotels);
      int getNumberOfHotels();
      List<Output> findCheapHotel(CustomerType customerType, String date1, String date2);
+     List<Output> findCheapBestRatedHotel(CustomerType customerType, String date1, String date2);
 }

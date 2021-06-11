@@ -48,6 +48,27 @@ public class HotelOperations implements IHotelOperations {
         return outputs.stream()
                 .filter(output -> output.getTotalRate() == outputs.get(0).getTotalRate())
                 .collect(Collectors.toList());
+    }
 
+    @Override
+    public List<Output> findCheapBestRatedHotel(CustomerType customerType, String date1, String date2) {
+        LocalDate initialDate = LocalDate.parse(date1, DATE_TIME_FORMATTER);
+        LocalDate endDate = LocalDate.parse(date2, DATE_TIME_FORMATTER);
+
+        List<Output> outputs = this.hotels.stream()
+                .map(hotel -> {
+                    Output output = new Output();
+                    output.setHotelName(hotel.getHotelName());
+                    output.setHotelRating(hotel.getRating());
+                    return output;
+                })
+                .sorted(Comparator.comparing(Output :: getTotalRate).thenComparing(Output :: getHotelRating))
+                .collect(Collectors.toList());
+
+        return outputs.stream()
+                .filter(output ->
+                        output.getTotalRate() == outputs.get(0).getTotalRate()
+                && output.getHotelRating() == outputs.get(0).getHotelRating())
+                .collect(Collectors.toList());
     }
 }

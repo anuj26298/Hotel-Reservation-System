@@ -57,7 +57,12 @@ public class HotelReservationTest {
     public void givenHotelsWithRate_WhenCheckedForCheapestHotel_ReturnCheapestRatedHotel() {
         List<Output> cheapestHotel = hotelOperations.findCheapHotel(CustomerType.REGULAR,
                 "10Sep2020", "11Sep2020");
-        Assert.assertEquals(2,cheapestHotel.size());
-        Assert.assertEquals(200,cheapestHotel.get(0).getTotalRate());
+        Assert.assertEquals(1,cheapestHotel.size());
+        Assert.assertEquals(220,cheapestHotel.get(0).getTotalRate());
+    }
+
+    @Test
+    public void givenHotelRating_WhenAddHotelRating_ReturnTrue() {
+        Assert.assertTrue(hotelOperations.addHotels(lakewood));
     }
 }
