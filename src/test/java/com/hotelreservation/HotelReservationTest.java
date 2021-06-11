@@ -67,7 +67,7 @@ public class HotelReservationTest {
     }
 
     @Test
-    public void givenHotelsAndDates_WhenFindBestRatedHotel_ReturnBestRatedHotel() {
+    public void givenHotelsAndDates_WhenFindCheapBestRatedHotel_ReturnCheapBestRatedHotel() {
         List<Output> bestRatedHotel = hotelOperations.findCheapBestRatedHotel(CustomerType.REGULAR,
                 "11Sep2020", "12Sep2020");
         Assert.assertEquals(1,bestRatedHotel.size());
@@ -76,5 +76,12 @@ public class HotelReservationTest {
         Assert.assertEquals(4, bestRatedHotel.get(0).getRating());
     }
 
-
+    @Test
+    public void givenHotelAndDates_WhenFindBestRatedHotel_ReturnBestRatedHotel() {
+        List<Output> bestRatedHotel = hotelOperations.findBestRatedHotel(CustomerType.REGULAR,
+                "11Sep2020", "12Sep2020");
+        Assert.assertEquals("Ridgewood", bestRatedHotel.get(0).getHotelName());
+        Assert.assertEquals(370, bestRatedHotel.get(0).getTotalRate());
+        Assert.assertEquals(5, bestRatedHotel.get(0).getRating());
+    }
 }

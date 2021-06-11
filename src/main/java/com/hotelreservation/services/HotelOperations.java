@@ -73,4 +73,24 @@ public class HotelOperations implements IHotelOperations {
                 && output.getRating() == outputs.get(0).getRating())
                 .collect(Collectors.toList());
     }
+
+    public List<Output> findBestRatedHotel(CustomerType customerType, String date1, String date2){
+        LocalDate initialDate = LocalDate.parse(date1, DATE_TIME_FORMATTER);
+        LocalDate endDate = LocalDate.parse(date2, DATE_TIME_FORMATTER);
+
+        List<Output> outputs = this.hotels.stream()
+                .map(hotel -> {
+                    Output output = new Output();
+                    output.setHotelName(hotel.getHotelName());
+                    output.setTotalRate(hotel.getTotalRate(customerType, initialDate, endDate));
+                    output.setRating(hotel.getRating());
+                    return output;
+                })
+                .sorted(Comparator.comparing(Output :: getRating, Comparator.reverseOrder()))
+                .collect(Collectors.toList());
+
+        return outputs.stream()
+                .filter(output -> output.getRating() == outputs.get(0).getRating())
+                .collect(Collectors.toList());
+    }
 }
